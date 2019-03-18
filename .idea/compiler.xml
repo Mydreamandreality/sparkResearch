@@ -9,6 +9,7 @@
         <module name="chapter2" />
         <module name="chapter3" />
         <module name="chapter4" />
+        <module name="chapter5" />
       </profile>
     </annotationProcessing>
   </component>
