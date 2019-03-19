@@ -10,7 +10,11 @@
         <module name="chapter3" />
         <module name="chapter4" />
         <module name="chapter5" />
+        <module name="chapter6" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="seclover" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

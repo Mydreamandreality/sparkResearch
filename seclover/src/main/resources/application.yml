@@ -1,0 +1,6 @@
+seclover:
+  sshUser: root
+  sshPwd:
+  sshIp: 47.104.171.41
+  sshPort: 22
+
