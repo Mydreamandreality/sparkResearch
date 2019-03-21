@@ -10,9 +10,9 @@ import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFunction;
 import scala.Tuple2;
 
-import java.nio.channels.InterruptedByTimeoutException;
 import java.util.Arrays;
 import java.util.Iterator;
+
 
 /**
  * Created by 張燿峰
@@ -140,5 +140,13 @@ public class PairRdd {
 
         /*还可以通过countByValue快速实现单词计数*/
         c.countByValue();
+
+        JavaPairRDD<String, Integer> javaPairRDD = sparkContext.parallelizePairs(Arrays.asList(new Tuple2<>("alert", 10)));
+        javaPairRDD.reduceByKey(new Function2<Integer, Integer, Integer>() {
+            @Override
+            public Integer call(Integer v1, Integer v2) throws Exception {
+                return null;
+            }
+        }, 1);
     }
 }
