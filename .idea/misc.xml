@@ -78,6 +78,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/chapert7/pom.xml" />
         <option value="$PROJECT_DIR$/seclover/pom.xml" />
       </set>
     </option>

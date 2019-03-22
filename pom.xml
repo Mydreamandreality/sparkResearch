@@ -26,6 +26,7 @@
         <module>chapter4</module>
         <module>chapter5</module>
         <module>chapter6</module>
+        <module>chapter7</module>
     </modules>
 
     <dependencies>
@@ -45,6 +46,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.46</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.jumpmind.symmetric/symmetric-csv -->
+        <dependency>
+            <groupId>org.jumpmind.symmetric</groupId>
+            <artifactId>symmetric-csv</artifactId>
+            <version>3.5.19</version>
         </dependency>
     </dependencies>
 
