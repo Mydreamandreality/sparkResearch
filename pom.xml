@@ -27,6 +27,7 @@
         <module>chapter5</module>
         <module>chapter6</module>
         <module>chapter7</module>
+        <module>chapter8</module>
     </modules>
 
     <dependencies>
@@ -36,6 +37,11 @@
             <artifactId>spark-core_2.11</artifactId>
             <version>2.2.3</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>2.2.3</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -52,6 +58,11 @@
             <groupId>org.jumpmind.symmetric</groupId>
             <artifactId>symmetric-csv</artifactId>
             <version>3.5.19</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.22</version>
         </dependency>
     </dependencies>
 
