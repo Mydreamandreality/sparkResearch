@@ -41,12 +41,9 @@ public class Accumulator {
         //注册累加器
         javaSparkContext.sc().register(attackAccumulator, "attack_count");
         //生成一个随机数作为value
-        JavaPairRDD<String, String> javaPairRDD = rdd.mapToPair(new PairFunction<String, String, String>() {
-            @Override
-            public Tuple2<String, String> call(String s) {
-                Integer random = new Random().nextInt(10);
-                return new Tuple2<>(s, s + ":" + random);
-            }
+        JavaPairRDD<String, String> javaPairRDD = rdd.mapToPair((PairFunction<String, String, String>) s -> {
+            Integer random = new Random().nextInt(10);
+            return new Tuple2<>(s, s + ":" + random);
         });
 
         javaPairRDD.foreach((VoidFunction<Tuple2<String, String>>) tuple2 -> {
