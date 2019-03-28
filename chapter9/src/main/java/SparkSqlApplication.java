@@ -1,7 +1,11 @@
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.function.Function;
+import org.apache.spark.sql.AnalysisException;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.types.DataTypes;
+import org.codehaus.janino.Java;
 import sun.plugin2.message.ShowDocumentMessage;
 
 import static org.apache.spark.sql.functions.col;
@@ -19,7 +23,7 @@ public class SparkSqlApplication {
                 .appName("Java Spark SQL")
                 .getOrCreate();
 
-        Dataset<Row> dataset = sparkSession.read().json("URL");
+        Dataset<Row> dataset = sparkSession.read().json("D:\\a.txt");
         //只返回name字段
         dataset.select("name").show();
         //返回两个字段,所有age的value+1
@@ -34,8 +38,10 @@ public class SparkSqlApplication {
 
         /*以编程的方式运行SQL查询*/
         //注册临时表
-        dataset.createOrReplaceGlobalTempView("user");
+        dataset.createOrReplaceTempView("user");
         Dataset<Row> users = sparkSession.sql("SELECT * FROM user");
+
+        JavaRDD<Object> toText = users.toJavaRDD().map((Function<Row, Object>) v1 -> v1.getString(0));
         users.show();
     }
 }
