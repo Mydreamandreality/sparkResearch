@@ -30,6 +30,7 @@
         <module>chapter8</module>
         <module>chapter9</module>
         <module>chapter10</module>
+        <module>chatper11</module>
     </modules>
 
     <dependencies>

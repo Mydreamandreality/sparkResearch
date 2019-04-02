@@ -20,4 +20,6 @@ public class Person implements Serializable {
         this.name = name;
         this.age = age;
     }
+
+    public Person(){}
 }
