@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="chapter10" />
         <module name="chapter13" />
+        <module name="chapter17" />
         <module name="chapter2" />
         <module name="chapter3" />
         <module name="chapter4" />
