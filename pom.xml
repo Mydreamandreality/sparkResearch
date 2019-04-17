@@ -82,9 +82,15 @@
             <artifactId>guava</artifactId>
             <version>21.0</version>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
     </dependencies>
 
     <properties>
         <java.version>1.8</java.version>
+        <mysql-connector-java.version>8.0.11</mysql-connector-java.version>
     </properties>
 </project>

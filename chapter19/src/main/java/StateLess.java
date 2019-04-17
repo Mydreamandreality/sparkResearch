@@ -1,23 +1,25 @@
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapred.SequenceFileOutputFormat;
 import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.function.FlatMapFunction;
-import org.apache.spark.api.java.function.Function;
-import org.apache.spark.api.java.function.Function2;
-import org.apache.spark.api.java.function.PairFunction;
+import org.apache.spark.api.java.function.*;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
-import org.codehaus.janino.Java;
 import scala.Tuple2;
+import tools.ConnectionPool;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.regex.Pattern;
 
 /**
  * Created by 張燿峰
  * 无状态转换操作案例
+ *
  * @author 孤
  * @date 2019/4/12
  * @Varsion 1.0
@@ -60,9 +62,34 @@ public class StateLess {
 
         JavaPairDStream<String, Integer> result1 = pairDStream.reduceByKey(new ReduceIsKey());
 
-        JavaPairDStream<String,Tuple2<Integer,Integer>> c = result.join(result);
+        JavaPairDStream<String, Tuple2<Integer, Integer>> c = result.join(result);
 
-        result.print();
 
+        result.foreachRDD(rdd -> {
+            rdd.foreachPartition(partitionOfRecords -> {
+                Connection connection = ConnectionPool.getConnection();
+                Tuple2<String, Integer> wordCount;
+                while (partitionOfRecords.hasNext()) {
+                    wordCount = partitionOfRecords.next();
+                    String sql = "insert into wordcount(word,count) " + "values('" + wordCount._1 + "',"
+                            + wordCount._2 + ")";
+                    Statement stmt = connection.createStatement();
+                    stmt.executeUpdate(sql);
+                }
+                ConnectionPool.returnConnection(connection);
+            });
+        });
+
+        try {
+            streamingContext.start();
+            streamingContext.awaitTermination();
+            streamingContext.close();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    class outFormat extends SequenceFileOutputFormat<Text, LongWritable> {
     }
 }
