@@ -19,6 +19,7 @@
         <module name="chapter8" />
         <module name="chapter9" />
         <module name="chatper11" />
+        <module name="kafkatest" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

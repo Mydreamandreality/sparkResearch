@@ -35,6 +35,7 @@
         <module>chapter17</module>
         <module>chapter19</module>
         <module>chapter19</module>
+        <module>kafka-test</module>
     </modules>
 
     <dependencies>
@@ -86,6 +87,17 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <!--分布式消息队列-->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.11</artifactId>
+            <version>0.9.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>0.9.0.1</version>
         </dependency>
     </dependencies>
 
