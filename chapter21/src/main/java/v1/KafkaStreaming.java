@@ -37,9 +37,9 @@ public class KafkaStreaming {
     private static final Pattern SPACE = Pattern.compile(" ");
 
     /**
-     * kafka地址和端口
+     * zookeeper主机
      */
-    private static final String HOST = "192.168.253.132:9092";
+    private static final String HOST = "192.168.253.132:2181";
 
     /**
      * 分组ID
