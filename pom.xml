@@ -37,6 +37,7 @@
         <module>chapter19</module>
         <module>kafka-test</module>
         <module>chapter21</module>
+        <module>chapter23</module>
     </modules>
 
     <dependencies>
@@ -63,6 +64,12 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-streaming-kafka_2.11</artifactId>
             <version>1.6.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-mllib -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_2.11</artifactId>
+            <version>2.2.3</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>

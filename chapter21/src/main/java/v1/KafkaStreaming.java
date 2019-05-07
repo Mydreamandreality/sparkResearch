@@ -65,25 +65,10 @@ public class KafkaStreaming {
         topicThread.put(TOPIC, THREAD);
         JavaPairInputDStream<String, String> dStream = KafkaUtils.createStream(streamingContext, HOST, GROP, topicThread);
 
-        JavaDStream<String> words = dStream.flatMap(new FlatMapFunction<Tuple2<String, String>, String>() {
-            @Override
-            public Iterator<String> call(Tuple2<String, String> stringStringTuple2) {
-                return Arrays.asList(SPACE.split(stringStringTuple2._2)).iterator();
-            }
-        });
+        JavaDStream<String> words = dStream.flatMap((FlatMapFunction<Tuple2<String, String>, String>) stringStringTuple2 -> Arrays.asList(SPACE.split(stringStringTuple2._2)).iterator());
 
         //统计
-        JavaPairDStream<String, Integer> result = words.mapToPair(new PairFunction<String, String, Integer>() {
-            @Override
-            public Tuple2<String, Integer> call(String s) {
-                return new Tuple2<>(s, 1);
-            }
-        }).reduceByKey(new Function2<Integer, Integer, Integer>() {
-            @Override
-            public Integer call(Integer v1, Integer v2) {
-                return v1 + v2;
-            }
-        });
+        JavaPairDStream<String, Integer> result = words.mapToPair((PairFunction<String, String, Integer>) s -> new Tuple2<>(s, 1)).reduceByKey((Function2<Integer, Integer, Integer>) (v1, v2) -> v1 + v2);
 
         try {
             result.print();
